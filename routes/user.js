@@ -5,7 +5,7 @@ const router = Router({});
 // Define routes
 
 router.get("/test-user", testUser);
-router.get("/register-user", register);
+router.post("/register-user", register);
 
 //Export the router
 

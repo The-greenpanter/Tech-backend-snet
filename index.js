@@ -23,12 +23,12 @@ const port  = process.env.PORT || 300;
 
 // Cors Config for the HTTPs request
 
-app.use(cors());
- // app.use(cors({origin:'*',methods: 'GET', 'PUT', 'HEAD', 'PATCH', 'POST', 'DELETE' }));
+// app.use(cors());
+app.use(cors({origin:'*',methods: 'GET, PUT, HEAD, PATCH, POST,DELETE' }));
 
 //decode data from the HTTPs request received from apache
-
-app.use(urlencoded({extended: true}));
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 
 
 // Route Config
