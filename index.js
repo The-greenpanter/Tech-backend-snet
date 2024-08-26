@@ -2,7 +2,9 @@ import dotenv from "dotenv";
 import express, {urlencoded} from "express";
 import cors from "cors";
 import connection from "./database/connection.js";
-
+import UserRoutes from "./routes/user.js";
+import PostRoutes from "./routes/post.js";
+import FollowRoutes from "./routes/follow.js";
 // Load environment variables
 dotenv.config();
 
@@ -28,7 +30,13 @@ app.use(cors());
 
 app.use(urlencoded({extended: true}));
 
+
 // Route Config
+
+app.use('/app/user',UserRoutes);
+app.use('/app/post',PostRoutes);
+app.use('/app/follow',FollowRoutes);
+
 
     //Test route
 
