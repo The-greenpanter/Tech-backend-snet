@@ -5,6 +5,16 @@ export const testUser = (req, res) => {
 
 // User Register Method
 
-export const register = (req, res) => {
-    return res.status(200).send({message: "User registered"});
-}
+export const register = async (req, res) => {
+  try {
+    //Get params of request
+
+    // Validate data obtained 
+  } catch (error) {
+    console.error("Fail to register", error);
+    return res.status(500).send({
+      status: "Error",
+      message: "Error issue with the register",
+    });
+  }
+};
