@@ -13,7 +13,7 @@ export const register = async (req, res) => {
     //Get params of request
     let params = req.body;
     // Debug with consol
-    // console.log(params);
+    console.log(params);
 
     // Validate data obtained 
       if (!params.name
@@ -24,6 +24,9 @@ export const register = async (req, res) => {
       ){
       return res.status(400).json({status: "error", message:"Missing fields"})
       };
+    // Transfor to lowercase
+    const email = params.email.toLowerCase();
+    const nick_name = params.nick_name.toLowerCase();
 
     // Object to be store at the DB
       let newUser = new User(params);
@@ -31,8 +34,8 @@ export const register = async (req, res) => {
     // Control duplicated users
       const existingUser = await User.findOne({
         $or: [
-          {email: newUser.email.toLowerCase()},
-          {nick_name: newUser.nick_name.toLowerCase()}
+          {email: newUser.email},
+          {nick_name: newUser.nick_name}
         ]
       });
 
@@ -70,31 +73,52 @@ export const register = async (req, res) => {
 // Login Method using JWT
 export const login = async (req, res) => {
   try {
-    // get params from body
+    // Obtener parámetros del cuerpo de la solicitud
+    const params = req.body;
+    console.log("Test", params);
 
-    // Validate params (email and password)
+    // Validar parámetros (email o nick_name y password)
+    if ((!params.email && !params.nick_name) || !params.password) {
+      return res.status(400).send({ status: "error", message: "Missing login information" });
+    }
+    // Convert email and nick_name to lowercase
+    const email = params.email ? params.email.toLowerCase() : null;
+    const nick_name = params.nick_name ? params.nick_name.toLowerCase() : null;
 
-    // Find email on DB
+    // Declarar variable de usuario
+    let user;
 
-      // If not found
+    // Buscar usuario por email o nick_name
+    if (params.email) {
+      user = await User.findOne({ email });
+    } else if (params.nick_name) {
+      user = await User.findOne({ nick_name });
+    }
 
-    //Check password
+    // Si no se encuentra el usuario
+    if (!user) {
+      return res.status(400).send({ status: "error", message: "Usuario no encontrado" });
+    }
 
-      // if invalid password
+    // Verificar contraseña
+    const confirmPassword = await bcrypt.compare(params.password, user.password);
 
-    // Create Autentication Token
-    
-    // Return Autentication Toke with user profile
+    // Si la contraseña es inválida
+    if (!confirmPassword) {
+      return res.status(400).send({ status: "error", message: "Password incorrecto" });
+    }
 
-    
-  } catch {
-    //Error handoling
+    // Crear Token de autenticación (pendiente de implementar)
+    // const token = createToken(user);
 
-    console.log("Authentication error", error);
+    // Retornar token de autenticación junto con el perfil del usuario
+    return res.status(200).json({ status: "success", message: "Login exitoso" /*, token, user*/ });
+  } catch (error) {
+    // Manejo de errores
+    console.log("Error de autenticación", error);
     return res.status(500).send({
-      status: "Error",
-      message: "Authentication error, please enter a valid email or password"
+      status: "error",
+      message: "Error de autenticación, por favor ingresa un email o password válidos"
     });
-  };
-
-}
+  }
+};

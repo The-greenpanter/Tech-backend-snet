@@ -1,1 +1,59 @@
 8ilii83L38vjWnAk
+
+{
+  "name": "Carlos",
+  "last_name": "Mendoza",
+  "email": "carlosm@example.com",
+  "password": "carlosPass456",
+  "nick_name": "carlito"
+}
+{
+  "name": "Isabel",
+  "last_name": "Ruiz",
+  "email": "isabel.ruiz@example.com",
+  "password": "isaPass789",
+  "nick_name": "bellita"
+}
+{
+  "name": "Andrés",
+  "last_name": "López",
+  "email": "andresl@example.com",
+  "password": "andresSecure123",
+  "nick_name": "andyl"
+}
+{
+  "name": "Mariana",
+  "last_name": "González",
+  "email": "mariana.g@example.com",
+  "password": "marianaPass321",
+  "nick_name": "marig"
+}
+{
+  "name": "Javier",
+  "last_name": "Torres",
+  "email": "javier.torres@example.com",
+  "password": "javiertPass654",
+  "nick_name": "javito"
+}
+{
+  "name": "Natalya",
+  "last_name": "Camargo",
+  "email": "natyCamargo@example.com",
+  "password": "securePassword123",
+  "nick_name": "natacion"
+}
+{
+  "name": "Juan",
+  "last_name": "Perez",
+  "email": "juan.perez@example.com",
+  "password": "securePassword123",
+  "nick_name": "juanperez"
+}
+{
+  name: 'green',
+  last_name: 'Panter',
+  email: 'greenpanter@gmail.com',
+  password: '1234cinco',
+  nick_name: 'thegreenpanter'
+}
+
