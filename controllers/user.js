@@ -1,5 +1,6 @@
 import User from "../models/users.js"
 import bcrypt from "bcrypt";
+import {createToken} from "../services/jwt.js"
 // Test Actions
 export const testUser = (req, res) => {
     return res.status(200).json({message: "Message send from user controller"});
@@ -11,7 +12,8 @@ export const register = async (req, res) => {
   try {
     //Get params of request
     let params = req.body;
-    console.log(params);
+    // Debug with consol
+    // console.log(params);
 
     // Validate data obtained 
       if (!params.name
@@ -25,7 +27,7 @@ export const register = async (req, res) => {
 
     // Object to be store at the DB
       let newUser = new User(params);
-
+      newUser.email = params.email.toLowerCase();
     // Control duplicated users
       const existingUser = await User.findOne({
         $or: [
@@ -53,7 +55,7 @@ export const register = async (req, res) => {
 
     await newUser.save();
 
-    return res.status(200).json({status: "success" ,message:"Register successfully made", params,newUser});
+    return res.status(200).json({status: "success" ,message:"Register successfully made",/*, params,newUser*/});
 
     // Return register user
   } catch (error) {
@@ -64,3 +66,35 @@ export const register = async (req, res) => {
     });
   }
 };
+
+// Login Method using JWT
+export const login = async (req, res) => {
+  try {
+    // get params from body
+
+    // Validate params (email and password)
+
+    // Find email on DB
+
+      // If not found
+
+    //Check password
+
+      // if invalid password
+
+    // Create Autentication Token
+    
+    // Return Autentication Toke with user profile
+
+    
+  } catch {
+    //Error handoling
+
+    console.log("Authentication error", error);
+    return res.status(500).send({
+      status: "Error",
+      message: "Authentication error, please enter a valid email or password"
+    });
+  };
+
+}
