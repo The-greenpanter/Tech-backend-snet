@@ -44,7 +44,7 @@ app.use('/app/follow',FollowRoutes);
         return rest.status(200).json(
             {
                 'id':1,
-                'name':'Green Pa nter',
+                'name':'Green Panter',
                 'username':'PanterTest'
 
             }

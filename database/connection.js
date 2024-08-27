@@ -9,7 +9,7 @@ const connection = async() => {
         console.log("Connected DB");
     } catch (error){
         console.log("Error: Fail to connect DB ", error);
-        throw new Error("Fata. Fail to connect!");
+        throw new Error("Fatal. Fail to connect!");
     }
 }
 
