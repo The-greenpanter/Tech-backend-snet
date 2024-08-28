@@ -1,13 +1,14 @@
-import {Router} from "express";
-import {testFollow} from "../controllers/follows.js";
-const router = Router({});
+import { Router } from "express";
+const router = Router();
+import { testFollow, saveFollow, unfollow, following, followers } from "../controllers/follows.js";
+import { ensureAuth } from "../middlewares/auth.js";
 
-// Define routes
+// Definir las rutas
+router.get('/test-follow', testFollow);
+router.post("/follow", ensureAuth, saveFollow);
+router.delete("/unfollow/:id", ensureAuth, unfollow);
+router.get("/following/:id?/:page?", ensureAuth, following);
+router.get("/followers/:id?/:page?", ensureAuth, followers);
 
-router.get("/test-follow", testFollow);
-
-//Export the router
-
+// Exportar el Router
 export default router;
-
-//
