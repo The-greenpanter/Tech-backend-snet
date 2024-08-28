@@ -109,10 +109,9 @@ export const login = async (req, res) => {
     }
 
     // Crear Token de autenticación (pendiente de implementar)
-    // const token = createToken(user);
-
+    const token = createToken(user);
     // Retornar token de autenticación junto con el perfil del usuario
-    return res.status(200).json({ status: "success", message: "Login exitoso" /*, token, user*/ });
+    return res.status(200).json({ status: "success", message: "Login exitoso", token, user });
   } catch (error) {
     // Manejo de errores
     console.log("Error de autenticación", error);
