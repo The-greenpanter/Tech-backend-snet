@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import { createToken } from "../services/jwt.js";
 import fs from "fs";
 import path from "path";
+
 // Test Actions
 export const testUser = (req, res) => {
   return res.status(200).json({ message: "Message send from user controller" });
@@ -292,12 +293,14 @@ export const updateUser = async (req, res) => {
 export const uploadAvatar = async (req, res) => {
   try {
     // Obtener el archivo de la imagen y comprobar si existe
+    
     if(!req.file){
       return res.status(404).send({
         status: "error",
         message: "Error la petición no incluye la imagen"
       });
     }
+    console.log(file);
 
     // Obtener el nombre del archivo
     let image = req.file.originalname;
