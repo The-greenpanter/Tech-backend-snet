@@ -1,4 +1,5 @@
 import {Schema, model} from "mongoose";
+import mongoosePaginate from "mongoose-paginate-v2";
 
 const UserSchema = Schema({
     name: {type: String,required: true},
@@ -11,6 +12,8 @@ const UserSchema = Schema({
     image:{type:String, default: "default.png"},
     created_at: {type: Date, default:  Date.now},
 });
+// Pagination plugin
+UserSchema.plugin(mongoosePaginate);
 
 export default model("User", UserSchema,"users");
 // "User" nombre del modelo
