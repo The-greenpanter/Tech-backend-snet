@@ -117,7 +117,34 @@ export const login = async (req, res) => {
     console.log("Error de autenticación", error);
     return res.status(500).send({
       status: "error",
-      message: "Error de autenticación, por favor ingresa un email o password válidos"
+      message: "Error de autenticación, por favor ingresa un email o password valid"
+    });
+  }
+};
+
+// Method to list User profile
+
+export const profile = async (req, res) => {
+  try {
+    // Get the user ID from http request
+    const userID = req.params.id;
+    console.log(userID);
+    
+    // Search user on DB excluding data we dont want to share
+    const user = await User.findById(userID).select('-password -role -email -_v');
+    // If user do not exist
+    if (!user) {
+      return res.status(404).send({
+        status: "error",
+        message: `No existe la entidad con el ID ${entityId}`,
+    });
+    }
+    return res.status(200).json({message: "Profile method", user});
+  }catch(error){
+    console.log("Error to get the user profile", error);
+    return res.status(500).send({
+      status: "error",
+      message: "Error de autenticación, por favor ingresa un email o password valid"
     });
   }
 };
